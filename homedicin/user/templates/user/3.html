@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{%load static%}
+{% static "" as baseUrl %}
+<html>
+<head>
+<style>
+ul {
+	list-style: none;
+}
+
+.btn-list {
+	background-color: #0b4877;
+	border-radius: 5px;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Verdana;
+	font-size: 20px;
+	padding: 6px 12px;
+	text-decoration: none;
+}
+
+.btn-list:hover {
+	background-color: #0b4877;
+}
+
+.btn-list:active {
+	position: relative;
+	top: 1px;
+}
+
+.btn-list-blue {
+	background-color: #EF746F;
+	border-radius: 5px;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Verdana;
+	font-size: 20px;
+	padding: 6px 12px;
+	text-decoration: none;
+}
+
+.btn-list-blue:hover {
+	background-color: #EF746F;
+}
+
+.btn-list-blue:active {
+	position: relative;
+	top: 1px;
+}
+</style>
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{baseUrl}}css/all.css" />
+<link rel="stylesheet" href="{{baseUrl}}css/style.css" />
+</head>
+<body>
+	<div class="container" align="center">
+		<div class="breadcrumb-main">
+			<ul class="breadcrumb">
+				<li class="breadcrumb-item"><h3 style="color: white;">처방약
+						비교 페이지</h3></li>
+			</ul>
+		</div>
+		<br>
+		<div>
+			<button class="btn-list" id ="INGREDIENT1" onclick = "location.href = '/2'">성분으로 검색하기</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button class="btn-list-blue" id ="EFFECT" onclick = "location.href = '/2'">효능으로 검색하기</button> &nbsp;
+		<br>
+		<br>
+
+			<table class="col-md-12">
+				<thead>
+				<tr>
+
+					<th>약 이름</th>
+					<th>성상</th>
+					<th>별점</th>
+					<th>조회수</th>
+					<th> </th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for a in getDetail2 %}
+					{% if forloop.counter <= 5 %}
+					<tr>
+
+						<td><a href="#">{{a.1}}</a></td>
+						<td>{{a.2}}</td>
+						<td>{{a.3}}</td>
+						<td>{{a.4}}</td>
+						<td>
+							<button class="btn-list" id ="INGREDIENT" onclick = "location.href = '/3'">비교</button> </a>&nbsp;
+
+						</td>
+					</tr>
+					{% endif %}
+				{% endfor %}
+				</tbody>
+			</table>
+	</div>
+	<br>
+	<hr>
+		<div class="container" align="center">
+	<table >
+		<td>
+	<div  class="col-md-12">
+		<form name="form1" method="get"style="font-size: 5px text-align: left" >
+		<input type="hidden" name="MD_CODE" id="MD_CODE" value="{{getDetail.0}}" >
+							<h3>타이레놀정500mg</h3>
+			<hr>
+			<h3 >성분정보</h3>
+			<p>아세트아미노펜 500mg</p>
+			<hr>
+			<h3 >효능효과</h3>
+			<p>1. 주효능·효과
+감기로 인한 발열 및 동통(통증), 두통, 신경통, 근육통, 월경통, 염좌통(삔 통증)
+2. 다음 질환에도 사용할 수 있다.
+치통, 관절통, 류마티양 동통(통증)</p>
+		</form>
+	</div>
+		</td>
+		<td>
+
+		<th>
+		<TH>&nbsp;</TH>
+		</th>
+
+		</td>
+		<td>
+		<div class="col-md-12" >
+		<form name="form1" method="get"style="font-size: 5px text-align: left" >
+		<input type="hidden" name="MD_CODE" id="MD_CODE" value="{{getDetail.0}}" >
+			<h3>{{search_ingr.0}}</h3>
+			<hr>
+			<h3 >성분정보</h3>
+			<p>{{search_ingr.1}}</p>
+			<hr>
+			<h3 >효능효과</h3>
+			<p>{{search_ingr.2}}</p>
+		</form>
+	</div>
+		</td>
+		</table>
+	</div>
+
+</body>
+</html>
