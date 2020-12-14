@@ -1,6 +1,6 @@
 import cx_Oracle as ora
 
-database = 'HOMEDICINE2/hd1234@localhost:1521/orcl'
+database = 'HOMEDICINE/hd1234@localhost:1521/orcl'
 
 def getDetail(MD_CODE):
     conn = ora.connect(database)
@@ -13,7 +13,7 @@ def getDetail(MD_CODE):
              dbms_lob.substr(MD_CAPA,DBMS_LOB.GETLENGTH(MD_CAPA)), \
              dbms_lob.substr(MD_CAUTION,DBMS_LOB.GETLENGTH(MD_CAUTION)), \
              MD_SAVE,MD_INGREDIENT,MD_COMPANIES,MD_CLASS, \
-             MD_APPR,MD_IN FROM MEDICINE  "
+             MD_APPR,MD_IN FROM MEDICINES  "
 
 
     cursor.execute(sql_get)
@@ -34,7 +34,7 @@ def getDetail1_1(MD_CODE):
              dbms_lob.substr(MD_CAPA,DBMS_LOB.GETLENGTH(MD_CAPA)), \
              dbms_lob.substr(MD_CAUTION,DBMS_LOB.GETLENGTH(MD_CAUTION)), \
              MD_SAVE,MD_INGREDIENT,MD_COMPANIES,MD_CLASS, \
-             MD_APPR,MD_IN FROM MEDICINE "
+             MD_APPR,MD_IN FROM MEDICINES "
 
 
     cursor.execute(sql_get)
@@ -48,7 +48,7 @@ def getDetail2(MD_CODE):
     conn = ora.connect(database)
     # print(MD_CODE)
     cursor = conn.cursor()
-    sql_get = "SELECT MD_CODE,MD_TITLE,MD_APPR ,MD_RATING,MD_HITS FROM MEDICINE "
+    sql_get = "SELECT MD_CODE,MD_TITLE,MD_APPR ,MD_RATING,MD_HITS FROM MEDICINES "
     cursor.execute(sql_get)
     datas = cursor.fetchall()
     conn.commit()
@@ -60,7 +60,7 @@ def getDetail2_1(MD_CODE):
     conn = ora.connect(database)
     # print(MD_CODE)
     cursor = conn.cursor()
-    sql_get ="SELECT MD_CODE,MD_TITLE,MD_APPR ,MD_RATING,MD_HITS FROM MEDICINE ORDER BY MD_CODE desc"
+    sql_get ="SELECT MD_CODE,MD_TITLE,MD_APPR ,MD_RATING,MD_HITS FROM MEDICINES ORDER BY MD_CODE desc"
     cursor.execute(sql_get)
     datas = cursor.fetchall()
     conn.commit()
@@ -71,7 +71,7 @@ def getDetail2_1(MD_CODE):
 def search_ingr(MD_CODE):
     conn = ora.connect(database)
     cursor = conn.cursor()
-    sql_get = "SELECT MD_TITLE,MD_INGREDIENT, dbms_lob.substr(MD_EFFECT,DBMS_LOB.GETLENGTH(MD_EFFECT)) from medicine where MD_INGREDIENT like '%아세트%' "
+    sql_get = "SELECT MD_TITLE,MD_INGREDIENT, dbms_lob.substr(MD_EFFECT,DBMS_LOB.GETLENGTH(MD_EFFECT)) from medicineS where MD_INGREDIENT like '%아세트%' "
     cursor.execute(sql_get)
     datas = cursor.fetchone()
     conn.commit()
@@ -82,7 +82,7 @@ def search_ingr(MD_CODE):
 def search_effect(MD_CODE):
     conn = ora.connect(database)
     cursor = conn.cursor()
-    sql_get = "SELECT MD_TITLE,MD_INGREDIENT, dbms_lob.substr(MD_EFFECT,DBMS_LOB.GETLENGTH(MD_EFFECT)) from medicine where MD_EFFECT like '%감기%' "
+    sql_get = "SELECT MD_TITLE,MD_INGREDIENT, dbms_lob.substr(MD_EFFECT,DBMS_LOB.GETLENGTH(MD_EFFECT)) from medicineS where MD_EFFECT like '%감기%' "
     cursor.execute(sql_get)
     datas = cursor.fetchone()
     conn.commit()
